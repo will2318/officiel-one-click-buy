@@ -44,4 +44,27 @@ public class StartByTestingThisTest {
 
         verify(productRepository).findBySku(SKU);
     }
+
+    @Test
+    void givenClientEmailAndProducSkuWhenOneClickBuyThenShouldAddProductToCart(){
+        Product product= new Product(SKU, NAME, PRICE);
+        when(productRepository.findBySku(SKU)).thenReturn(product);
+
+        when(cartFactory.create(UN_MAIL)).thenReturn(new Cart(UN_MAIL));
+        service.oneClickBuy(UN_MAIL, SKU);
+
+        Assertions.assertEquals(1,service.getCart().getProducts().size());
+
+    }
+
+    @Test
+    void givenClientEmailAndProducSkuWhenOneClickBuyThenShouldAddProductFoundedToCart(){
+        Product product= new Product(SKU, NAME, PRICE);
+        when(productRepository.findBySku(SKU)).thenReturn(product);
+
+        when(cartFactory.create(UN_MAIL)).thenReturn(new Cart(UN_MAIL));
+        service.oneClickBuy(UN_MAIL, SKU);
+
+        Assertions.assertEquals(product,service.getCart().getProducts().get(0));
+    }
 }
