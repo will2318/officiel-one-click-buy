@@ -13,8 +13,8 @@ public class StartByTestingThis {
     public Invoice oneClickBuy(String clientEmail, String productSku) {
         // Étape 1 : Créer le cart avec le CartFactory
         cartFactory.create(clientEmail);
-        product=productRepository.findBySku(productSku);
         // Étape 2 : Trouver le produit avec le ProductRepository
+        product=productRepository.findBySku(productSku);
         // Étape 3 : Ajouter le produit au cart
         // Étape 4 : Pour chaque item du cart, ajouter une ligne sur l'invoice
         // Étape 5 : Retourner l'invoice
